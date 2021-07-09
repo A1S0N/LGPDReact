@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import DialogRuleEdit from './DialogRuleEdit';
 
 const columns = [
   { id: 'title', label: 'Título', minWidth: 170 },
@@ -13,9 +14,18 @@ const columns = [
 ];
 
 export default class TableApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        open: false,
+        rule: {id: 0, title: '', severity: 0}
+    };
+}
+
   render(){
     return (
       <Paper style={{width: '100%'}}>
+        <DialogRuleEdit rule={this.state.rule} open={this.state.open} />
         <TableContainer style={{maxHeight: 440}}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -34,7 +44,7 @@ export default class TableApp extends React.Component {
             <TableBody>
               {this.props.data.map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code} >
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
