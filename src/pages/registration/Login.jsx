@@ -50,7 +50,7 @@ class Login extends React.Component {
                             <Face />
                         </Grid>
                         <Grid item md={true} sm={true} xs={true}>
-                            <TextField onChange={(e) => this.setState({ username: e.target.value })} id="username" label="Username" type="email" fullWidth autoFocus required />
+                            <TextField onChange={(e) => this.setState({ username: e.target.value })} id="username" label="Username" type="text" fullWidth autoFocus required />
                         </Grid>
                     </Grid>
                     <Grid container spacing={8} alignItems="flex-end">

@@ -1,20 +1,33 @@
 import React from 'react';
-import { Container, Fab } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import NavAppBar from '../components/NavAppBar';
 import TableApp from '../components/TableApp';
-import AddIcon from '@material-ui/icons/Add';
+import DialogRule from '../components/DialogRule';
+import axios from 'axios';
+import { API_URL } from '../core';
 
 class Home extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            rules: [],
+        };
+    }
+
+    componentDidMount() {
+        axios.get(API_URL + '/api/rules?format=json')
+            .then(res => {
+                this.setState({ rules: res.data });
+            })       
+    }
     render() {
         return (
             <>
             <NavAppBar />
             <Container style={{marginTop: 20}}>
-                <TableApp />
+                <TableApp data={this.state.rules}/>
             </Container>
-            <Fab color="secondary" aria-label="add" style={{position: 'absolute', bottom: 40, right: 40}} >
-                <AddIcon />
-            </Fab>
+            <DialogRule />       
             </>
         );
     }
