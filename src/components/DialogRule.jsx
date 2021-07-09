@@ -9,7 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from '@material-ui/icons/Add';
 import { Fab } from '@material-ui/core';
 import axios from 'axios';
-import { API_URL, axiosconfig } from "../core";
+import { API_URL } from "../core";
 
 export default class DialogRule extends React.Component {
     constructor(props) {
@@ -28,11 +28,13 @@ export default class DialogRule extends React.Component {
         this.setState({open: false});
     };
 
-    handleSubmit = () => {
-      axios.post(`${API_URL}/api/newRule`, '{"title": this.state.title, "severity": 0}', axiosconfig)
+    handleSubmit(e) {
+      e.preventDefault();
+      axios.post(`${API_URL}/api/rules/new`, {title: this.state.title, severity: this.state.severity})
           .then(res => {
-              if (res.status === 200) {
+              if (res.status === 201) {
                   this.setState({ err: false, open: false, title: '', severity: 0})
+                  this.props.getData();
               }
           }).catch(err =>
               this.setState({ err: true })
@@ -50,7 +52,7 @@ export default class DialogRule extends React.Component {
                 <DialogTitle id="form-dialog-title">Nova Regra</DialogTitle>
                 <DialogContent>
                   <DialogContentText style={{width: '60vw'}}></DialogContentText>
-                  <form id="ruleForm" onSubmit={this.handleSubmit}>
+                  <form id="ruleForm" onSubmit={(e) => this.handleSubmit(e)}>
                   <TextField
                     autoFocus
                     required
@@ -59,15 +61,16 @@ export default class DialogRule extends React.Component {
                     label="Título"
                     type="text"
                     fullWidth
+                    onChange={(e) => this.setState({ title: e.target.value })}
                   />
                   <TextField
-                    autoFocus
                     required
                     margin="dense"
                     id="severity"
                     label="Gravidade"
                     type="number"
                     fullWidth
+                    onChange={(e) => this.setState({ severity: e.target.value })}
                   />
                   </form>
                 </DialogContent>

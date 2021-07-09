@@ -15,10 +15,14 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
+        this.getData(); 
+    }
+
+    getData(){
         axios.get(API_URL + '/api/rules?format=json')
-            .then(res => {
-                this.setState({ rules: res.data });
-            })       
+        .then(res => {
+            this.setState({ rules: res.data });
+        })
     }
     render() {
         return (
@@ -27,7 +31,7 @@ class Home extends React.Component {
             <Container style={{marginTop: 20}}>
                 <TableApp data={this.state.rules}/>
             </Container>
-            <DialogRule />       
+            <DialogRule getData={this.getData.bind(this)}/>
             </>
         );
     }
