@@ -7,12 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -112,6 +110,7 @@ export default function NavAppBar() {
       history.push('/login')
   }
 
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -145,29 +144,16 @@ export default function NavAppBar() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            LGPDReact
+            <Link to='/home' style={{ color: 'inherit', textDecoration: 'inherit'}}>LGPDReact</Link>
           </Typography>          
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+          <Link to='/requests' style={{ color: 'inherit', textDecoration: 'inherit'}}>
             <IconButton aria-label="" color="inherit">
-              <Badge badgeContent={5} color="secondary">
-                <MailIcon />
-              </Badge>
+              <MailIcon />
             </IconButton>
-            <IconButton aria-label="" color="inherit">
-              <Badge badgeContent={10} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+          </Link>
             <IconButton
               edge="end"
               aria-label="account of current user"

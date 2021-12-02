@@ -1,15 +1,15 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
 import NavAppBar from '../components/NavAppBar';
-import TableApp from '../components/TableApp';
+import TableRequests from '../components/TableRequests';
 import axios from 'axios';
 import { API_URL } from '../core';
 
-class Home extends React.Component {
+class Requests extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            models: [],
+            requests: [],
         };
     }
 
@@ -18,9 +18,9 @@ class Home extends React.Component {
     }
 
     getData(){
-        axios.get(API_URL + '/api/models?format=json')
+        axios.get(API_URL + '/api/requests?format=json')
         .then(res => {
-            this.setState({ models: res.data });
+            this.setState({ requests: res.data });
         })
     }
     render() {
@@ -28,11 +28,11 @@ class Home extends React.Component {
             <>
             <NavAppBar/>
             <Container style={{marginTop: 20}}>
-                <TableApp data={this.state.models}/>
+                <TableRequests data={this.state.requests}/>
             </Container>
             </>
         );
     }
 }
 
-export default Home;
+export default Requests;

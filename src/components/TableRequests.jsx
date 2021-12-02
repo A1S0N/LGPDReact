@@ -9,16 +9,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import {Link} from 'react-router-dom';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
-import Chip from '@material-ui/core/Chip';
 
 const columns = [
-  { id: 'model', label: 'Tabelas encontradas', minWidth: 170 },
-  { id: 'saude', label: 'Status', minWidth: 170 },
+  { id: 'solicitante', label: 'Solicitante', minWidth: 170 },
+  { id: 'tipo', label: 'Tipo', minWidth: 170 },
   { id: 'ver', label: '', minWidth: 170 },
 ];
 
-export default class TableApp extends React.Component {
+export default class TableRequests extends React.Component {
 
   render(){
     return (
@@ -43,20 +41,20 @@ export default class TableApp extends React.Component {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code} >
                      <TableCell style={{textAlign: 'center'}}>
-                          {row.model}
+                          {row.name}
                       </TableCell>
                       <TableCell style={{textAlign: 'center'}}>
-                          {row.problem === true ? <Chip label="Precisa de atenção" color="secondary" icon={<PriorityHighIcon />} /> : <span style={{color: 'green'}}>OK</span>}
+                          {row.type}
                       </TableCell>
                       <TableCell style={{textAlign: 'center'}}>
                         <Link
                           to={{
-                            pathname: "/details",
+                            pathname: "/requests/details",
                             state: row
                           }}
                         >
 
-                            <IconButton color="primary" aria-label="ver saude" component="span">
+                            <IconButton color="primary" component="span">
                               <VisibilityIcon />
                             </IconButton>
                         </Link>
